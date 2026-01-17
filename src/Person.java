@@ -1,6 +1,10 @@
 import javax.naming.Name;
 import java.time.LocalDate;
-
+/**
+* elk persoon aan boord deelt deze attributes
+ * naam, achternaam, rijksregisternummer, geboortedatum
+*
+ */
 public abstract class Person {
     private String name;
     private String lastName;
