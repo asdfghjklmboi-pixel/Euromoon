@@ -1,3 +1,5 @@
+package basis.constants;
+
 public enum Stations {
     TIRANE,
     ANDORRA_LA_VELLA,

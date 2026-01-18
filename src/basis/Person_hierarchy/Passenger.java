@@ -1,8 +1,11 @@
+package basis.Person_hierarchy;
+
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Passenger extends Person {
-private Ticket buyTicket;
+private List<Ticket> tickets = new ArrayList<>();
 
     public Passenger(String registerNr,
                      String name,
@@ -12,9 +15,9 @@ private Ticket buyTicket;
     }
 
 public void buyTicket(Ticket ticket){
-this.buyTicket = ticket;
+        tickets.add(ticket);
 }
 public List<Ticket> getTicket(){
-        return buyTicket;
+        return tickets;
 }
 }

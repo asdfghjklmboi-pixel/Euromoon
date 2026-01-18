@@ -1,10 +1,12 @@
+package basis.Person_hierarchy;
+
 import java.time.LocalDate;
 /**
 * elk persoon aan boord deelt deze attributes
  * naam, achternaam, rijksregisternummer, geboortedatum
 *
  */
-public abstract class Person {
+    public abstract class Person {
     private final String name;
     private final String lastName;
     private final String registerNr;
@@ -21,15 +23,19 @@ public abstract class Person {
     }
 
     public String getName(){
+
         return name;
     }
     public String getLastName(){
+
         return lastName;
     }
     public String getRegisterNr(){
+
         return registerNr;
     }
     public LocalDate getDateOfBirth(){
+
         return dateOfBirth;
     }
 }
