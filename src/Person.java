@@ -1,4 +1,3 @@
-import javax.naming.Name;
 import java.time.LocalDate;
 /**
 * elk persoon aan boord deelt deze attributes
@@ -6,12 +5,15 @@ import java.time.LocalDate;
 *
  */
 public abstract class Person {
-    private String name;
-    private String lastName;
-    private int registerNr;
-    private LocalDate dateOfBirth;
+    private final String name;
+    private final String lastName;
+    private final String registerNr;
+    private final LocalDate dateOfBirth;
 
-    public Person(int registerNr, String name, String lastName, LocalDate dateOfBirth) {
+    public Person(String registerNr,
+                  String name,
+                  String lastName,
+                  LocalDate dateOfBirth) {
         this.registerNr = registerNr;
         this.name = name;
         this.lastName = lastName;
@@ -24,7 +26,7 @@ public abstract class Person {
     public String getLastName(){
         return lastName;
     }
-    public int getRegisterNr(){
+    public String getRegisterNr(){
         return registerNr;
     }
     public LocalDate getDateOfBirth(){
