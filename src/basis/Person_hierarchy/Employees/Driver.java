@@ -3,35 +3,38 @@ import basis.Person_hierarchy.Employee;
 import basis.constants.Certificates;
 
 import java.time.LocalDate;
-import java.util.Set;
 
+/**
+ * Driver is an employee with qualification {@link Certificates#DRIVING_B1}
+ * the initial certificate held at creation
+ */
 public class Driver extends Employee {
-    private Train drivesTrain;
-
-    public Driver(String registerNr,
-                  String name,
+    /**
+     * constructs driver with personal info + initial certificate
+     * @param firstName first name of driver
+     * @param lastName last name of driver
+     * @param registerNr register number of driver
+     * @param dateOfBirth date of birth of driver
+     * @param initialCert inital certificate of driver
+     * @throws IllegalArgumentException if {@code initialCert} is null
+     * @throws IllegalStateException if driver does not hold B1 License
+     */
+    public Driver(String firstName,
                   String lastName,
+                  String registerNr,
                   LocalDate dateOfBirth,
-                  String certificates){
-        super(name, lastName, dateOfBirth, registerNr);
+                  Certificates initialCert){
+        super(firstName, lastName, registerNr, dateOfBirth, initialCert);
     }
 
-    public void assignTrain(Train train) {
-        if(!getCertificates().contains(Certificates.DRIVING_B1)) {
-            throw new IllegalStateException("Person doesn't meet the requirements for being driver");
-        }
-        this.drivesTrain = train;
+    /**
+     * qualification
+     * @return {@link Certificates#DRIVING_B1}
+     */
+    @Override
+    protected Certificates getQualification() {
+        return Certificates.DRIVING_B1;
     }
 
-    public Train getDrivesTrain() {
-        return drivesTrain;
-    }
 
-   public void addCertificates(Certificates certificates){
-        //certificates
-   }
-
-   public Set<Certificates> getCertificates(){
-        return Set.copyOf(certificates)
-   }
 }
