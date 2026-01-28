@@ -3,6 +3,7 @@ package basis;
 import Trains.Train;
 import basis.Person_hierarchy.Employee;
 import basis.constants.Certificates;
+import basis.constants.Stations;
 import basis.constants.TravelClass;
 
 import java.time.LocalDateTime;
@@ -15,14 +16,14 @@ import java.util.List;
  */
 
 public class Trip {
-    private String startStation;
-    private String destination;
+    private Stations startStation;
+    private Stations destination;
     private LocalDateTime departureTime;
     private Train train;
     private List<Employee> staff;
     private List<Ticket> soldTickets;
 
-    public Trip(String startStation, String destination, LocalDateTime departureTime) {
+    public Trip(Stations startStation, Stations destination, LocalDateTime departureTime) {
         this.startStation = startStation;
         this.destination = destination;
         this.departureTime = departureTime;
@@ -108,10 +109,10 @@ public class Trip {
     public List<Ticket> getSoldTickets(){
         return new ArrayList<>(soldTickets);
     }
-    public String getDestination() {
+    public Stations getDestination() {
         return destination;
     }
-    public String getStartStation() {
+    public Stations getStartStation() {
         return startStation;
     }
     public LocalDateTime getDepartureTime() {

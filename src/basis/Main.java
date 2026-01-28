@@ -2,6 +2,7 @@ package basis;
 
 import Trains.*;
 import basis.Person_hierarchy.Passenger;
+import basis.constants.Stations;
 import basis.constants.TravelClass;
 
 import java.io.IOException;
@@ -24,6 +25,7 @@ public class Main {
 
     /**
      * starts the program/menu loop
+     *
      * @param args not used
      */
     public static void main(String[] args) {
@@ -107,11 +109,11 @@ public class Main {
      * creates a new train trip
      * prompt stations and departure
      */
-    private static void createTrip() {
-        System.out.print("From: ");
-        String startStation = scanner.nextLine();
-        System.out.print("To: ");
-        String destination = scanner.nextLine();
+    private static Trip createTrip() {
+        Stations startStation = selectStation("start");
+        if (startStation == null) return null;
+        Stations destination = selectStation("destination");
+        if (destination == null) return null;
 
         LocalDateTime departure = null;
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
@@ -129,6 +131,7 @@ public class Main {
         Trip trip = new Trip(startStation, destination, departure);
         trips.add(trip);
         System.out.println("Trip created.");
+        return trip;
     }
 
     /**
@@ -144,11 +147,11 @@ public class Main {
         /* itereer door lijst van trips
          */
         for (int i = 0; i < trips.size(); i++) {
-            System.out.println(i + ". " + trips.get(i).getTripRoute());
+            System.out.println((i + 1) + ". " + trips.get(i).getTripRoute());
         }
 
         System.out.print("Choose Trip: ");
-        int index = Integer.parseInt(scanner.nextLine());
+        int index = Integer.parseInt(scanner.nextLine()) - 1;
 
         if (index < 0 || index >= trips.size()) {
             System.out.println("Error.");
@@ -156,6 +159,26 @@ public class Main {
         }
         return trips.get(index);
     }
+
+    private static Stations selectStation(String s) {
+        Stations[] stations = Stations.values();
+
+        System.out.println("choose " + s + " station");
+        for (int i = 0; i < stations.length; i++) {
+            System.out.println((i + 1) + ". " + stations[i]);
+        }
+        try {
+           int index = Integer.parseInt(scanner.nextLine()) - 1;
+        if (index < 0 || index >= stations.length) {
+            System.out.println("Error.");
+            return null;
+        }
+        return stations[index];
+        } catch (NumberFormatException e) {
+            System.out.println("Error.");
+        }    return null;
+    }
+
 
     /**
      * add train/locomotive to a selected trip
@@ -195,11 +218,11 @@ public class Main {
         }
 
         for (int i = 0; i < passengers.size(); i++) {
-            System.out.println(i + ". " + passengers.get(i).getFirstName());
+            System.out.println((i + 1)  + ". " + passengers.get(i).getFirstName());
         }
 
         System.out.print("Choose passenger: ");
-        int index = Integer.parseInt(scanner.nextLine());
+        int index = Integer.parseInt(scanner.nextLine()) - 1;
 
         if (index < 0 || index >= passengers.size()) {
             System.out.println("Error.");
