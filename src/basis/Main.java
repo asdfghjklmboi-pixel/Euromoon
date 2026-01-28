@@ -1,6 +1,8 @@
 package basis;
 
 import Trains.*;
+import basis.Person_hierarchy.Employees.Driver;
+import basis.Person_hierarchy.Employees.Steward;
 import basis.Person_hierarchy.Passenger;
 import basis.constants.Stations;
 import basis.constants.TravelClass;
@@ -73,6 +75,7 @@ public class Main {
                 System.out.println("invalid number");
             } catch (Exception e) {
                 System.out.println("error: " + e.getMessage());
+                scanner.nextLine();
             }
         }
     }
@@ -103,6 +106,7 @@ public class Main {
         }
         passengers.add(new Passenger(firstName, lastName, registerNr, dob));
         System.out.println("passenger registered.");
+        scanner.nextLine();
     }
 
     /**
@@ -131,6 +135,7 @@ public class Main {
         Trip trip = new Trip(startStation, destination, departure);
         trips.add(trip);
         System.out.println("Trip created.");
+        scanner.nextLine();
         return trip;
     }
 
@@ -142,6 +147,10 @@ public class Main {
     private static Trip selectTrip() {
         if (trips.isEmpty()) {
             System.out.println("No trips currently available!");
+            System.out.println("Press Enter to continue");
+
+            scanner.nextLine();
+
             return null;
         }
         /* itereer door lijst van trips
@@ -154,7 +163,9 @@ public class Main {
         int index = Integer.parseInt(scanner.nextLine()) - 1;
 
         if (index < 0 || index >= trips.size()) {
-            System.out.println("Error.");
+            System.out.println("Press Enter to continue");
+            scanner.nextLine();
+
             return null;
         }
         return trips.get(index);
@@ -171,11 +182,13 @@ public class Main {
            int index = Integer.parseInt(scanner.nextLine()) - 1;
         if (index < 0 || index >= stations.length) {
             System.out.println("Error.");
+            scanner.nextLine();
             return null;
         }
         return stations[index];
         } catch (NumberFormatException e) {
             System.out.println("Error.");
+            scanner.nextLine();
         }    return null;
     }
 
@@ -186,6 +199,7 @@ public class Main {
     private static void assignTriptoTrain() {
         Trip trip = selectTrip();
         if (trip == null) return;
+
 
         System.out.println("Choose locomotive type");
         System.out.println("1. Class 373 (max 12 wagons)");
@@ -205,6 +219,7 @@ public class Main {
 
         trip.setTrain(train);
         System.out.println("Train has been assigned to the trip.");
+        scanner.nextLine();
     }
 
     /**
@@ -214,6 +229,7 @@ public class Main {
     private static Passenger selectPassenger() {
         if (passengers.isEmpty()) {
             System.out.println("No passengers");
+            scanner.nextLine();
             return null;
         }
 
@@ -226,11 +242,24 @@ public class Main {
 
         if (index < 0 || index >= passengers.size()) {
             System.out.println("Error.");
+            scanner.nextLine();
             return null;
         }
         return passengers.get(index);
     }
+/**
+    private static void assignStaffToTrip() {
+        Trip trip = selectTrip();
+        if (trip== null) return;
 
+        Driver driver = new Driver("John", "Doe");
+        List<Steward> stewards = new ArrayList<>();
+        stewards.add(new Steward("Jane", "Doe"));
+        stewards.add(new Steward("Amanda", "Shamanda"));
+        stewards.add(new Steward("Nicki", "Minaj"));
+
+    }
+    **/
     private static void sellTicket() {
 
         Passenger passenger = selectPassenger();
@@ -267,13 +296,14 @@ public class Main {
 
         if (trip.getSoldTickets().isEmpty()) {
             System.out.println("no passengers");
+            System.out.println("Press Enter to continue");
+            scanner.nextLine();
             return;
         }
 
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy'T'HH-mm");
-
         String fileName =
-                trip.getStartStation() + "_" +
+                       trip.getStartStation() + "_" +
                         trip.getDestination() + "_" +
                         trip.getDepartureTime().format(formatter) + ".txt";
 
@@ -287,6 +317,8 @@ public class Main {
             System.out.println("printed " + fileName);
         } catch (IOException e) {
             System.out.println("error: " + e.getMessage());
+            scanner.nextLine();
+
         }
     }
 }
